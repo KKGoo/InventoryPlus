@@ -21,7 +21,8 @@ app.use(session({
 }));
 
 app.use(cors({
-    allowHeaders: ["koa.sid", "koa.sid.sig"]
+    allowHeaders: ["koa.sid", "koa.sid.sig"],
+    credentials: true
 }));
 app.use(bodyParser());
 app.use(authRouter.routes());

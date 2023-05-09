@@ -21,7 +21,7 @@ app.use(session({
 }));
 
 app.use(cors({
-    allowHeaders: ["koa.sid", "koa.sid.sig"],
+    allowHeaders: ["*"],
     credentials: true
 }));
 app.use(bodyParser());

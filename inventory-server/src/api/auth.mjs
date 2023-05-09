@@ -24,7 +24,6 @@ const bodyCredentialsMiddleware = async (ctx, next) => {
     await next();
 };
 
-
 router.post("/login", bodyCredentialsMiddleware, async ctx => {
     const credentials = ctx.bodyCredentials;
 
@@ -58,6 +57,17 @@ router.post("/login", bodyCredentialsMiddleware, async ctx => {
     ctx.body = "Logged in";
     ctx.response.status = 200;
 });
+
+router.get("/islogged", async ctx => {
+    if (("userId" in ctx.session) && ctx.session.userId != null) {
+        ctx.response.status = 200;
+        ctx.body = "Logged in";
+        return;
+    }
+
+    ctx.response.status = 401;
+    ctx.body = "Not logged in";
+})
 
 router.post("/register", bodyCredentialsMiddleware, async ctx => {
     const credentials = ctx.bodyCredentials;

@@ -1,0 +1,25 @@
+{
+    "enterprises": [
+      {
+        "id": 1,
+        "name": "Acme Corp",
+        "address": "123 Main St",
+        "nit": "123456789",
+        "phone": "555-555-1234"
+      },
+      {
+        "id": 2,
+        "name": "Widgets Inc",
+        "address": "456 Elm St",
+        "nit": "987654321",
+        "phone": "555-555-5678"
+      },
+      {
+        "id": 3,
+        "name": "Globex Corp",
+        "address": "789 Oak St",
+        "nit": "2468101214",
+        "phone": "555-555-9012"
+      }
+    ]
+  }

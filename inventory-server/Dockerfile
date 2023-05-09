@@ -4,7 +4,7 @@ WORKDIR /home/app/web
 
 COPY . .
 
-RUN npm init
+RUN npm install
 
 RUN mkdir db
 

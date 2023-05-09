@@ -22,10 +22,10 @@ await Company.sync();
 
 await User.findOrCreate({
     where: {
-        username: "admin"
+        email: "admin@admin.com"
     },
     defaults: {
-        username: "admin",
+        email: "admin@admin.com",
         password: await hashPassword("testpassword"),
         role: 0
     }
@@ -33,10 +33,10 @@ await User.findOrCreate({
 
 await User.findOrCreate({
     where: {
-        username: "user"
+        email: "user@user.com"
     },
     defaults: {
-        username: "user",
+        email: "user@user.com",
         password: await hashPassword("testpassword"),
         role: 1
     }

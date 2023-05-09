@@ -18,6 +18,11 @@ Authentication is cookie based. Users keep a session id related to their session
 
 Both cookies must be present in requests made to protected endpoints.
 
+## Default credentials
+
+- Admin: `admin@admin.com testpassword`
+- Guest: `user@user.com testpassword`
+
 ## API Models
 
 External representations of the database models contained within the project.
@@ -25,7 +30,7 @@ External representations of the database models contained within the project.
 ### User
 
 Fields:
-- `username` = string
+- `email` = string
 - `password` = string
 
 ### Company
@@ -40,13 +45,14 @@ Fields:
 
 Runs in port 3000.
 
-All endpoints return 400 if parameters are invalid. The reason is returned as a string.
+All endpoints return 400 if parameters are invalid. The reason is returned as a string. All endpoints requiring
+authentication will return 401 if user is not authenticated, or 403 if user doesn't have enough permissions to see.
 
 ### Auth
 
 Uses model: User
 
-- `POST /login` = Provides a login mechanism to the user. Expects request body to be `{ "username": string, "password": string}`.
+- `POST /login` = Provides a login mechanism to the user. Expects request body to be `{ "email": string, "password": string}`.
 If user is already logged in, status code `201` is returned. If login is successful, status code `200` is returned.
 - `POST /register` = Provides registration to the user. Expects request body to be the same as `/login` endpoint. Status
 code `200` is returned if creation was successful. After registration, user has to log in.

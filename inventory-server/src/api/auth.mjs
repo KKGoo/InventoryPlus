@@ -8,15 +8,15 @@ export const router = new KoaRouter();
 const bodyCredentialsMiddleware = async (ctx, next) => {
     const credentials = ctx.request.body;
 
-    if (!("username" in credentials) || !("password" in credentials)) {
+    if (!("email" in credentials) || !("password" in credentials)) {
         ctx.response.status = 400;
-        ctx.body = "Username and/or password have to be declared";
+        ctx.body = "Email and/or password have to be declared";
         return;
     }
 
-    if (!(typeof credentials.username === "string") || !(typeof credentials.password === "string")) {
+    if (!(typeof credentials.email === "string") || !(typeof credentials.password === "string")) {
         ctx.response.status = 400;
-        ctx.body = "Username and password must be strings.";
+        ctx.body = "Email and password must be strings.";
         return;
     }
 
@@ -36,7 +36,7 @@ router.post("/login", bodyCredentialsMiddleware, async ctx => {
 
     const localUser = await User.findAll({
         where: {
-            username: credentials.username
+            email: credentials.email
         }
     });
 
@@ -53,7 +53,7 @@ router.post("/login", bodyCredentialsMiddleware, async ctx => {
     }
 
     ctx.session.userId = localUser[0].id
-    ctx.session.username = localUser[0].username
+    ctx.session.email = localUser[0].email
     ctx.session.role = localUser[0].role
     ctx.body = "Logged in";
     ctx.response.status = 200;
@@ -64,7 +64,7 @@ router.post("/register", bodyCredentialsMiddleware, async ctx => {
 
     try {
         await User.create({
-            username: credentials.username,
+            email: credentials.email,
             password: await hashPassword(credentials.password),
             role: 1
         });

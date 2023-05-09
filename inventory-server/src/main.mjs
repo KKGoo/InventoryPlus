@@ -5,6 +5,7 @@ import SQLite3Store from "koa-sqlite3-session";
 import {router as authRouter} from "./api/auth.mjs";
 import {router as companyRouter} from "./api/company.mjs";
 import bodyParser from "koa-bodyparser";
+import cors from "@koa/cors";
 
 const app = new Koa();
 const router = new KoaRouter();
@@ -19,6 +20,9 @@ app.use(session({
     })
 }));
 
+app.use(cors({
+    allowHeaders: ["koa.sid", "koa.sid.sig"]
+}));
 app.use(bodyParser());
 app.use(authRouter.routes());
 app.use(authRouter.allowedMethods());

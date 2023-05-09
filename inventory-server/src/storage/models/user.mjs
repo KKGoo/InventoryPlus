@@ -3,7 +3,7 @@ import {DataTypes} from "sequelize";
 
 export const userModel = (sequelize) => {
     return sequelize.define("User", {
-        username: {
+        email: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true

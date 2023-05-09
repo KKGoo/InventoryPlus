@@ -1,0 +1,120 @@
+/* App */
+.App{
+    height: 100vh;
+}
+
+/* Quikly Center Everything In Div */
+
+
+/* Container Styling */
+.Container{
+    position: relative; 
+    width: 50%;
+    height: 60%;
+    border: 0.1em solid #02315E;
+    border-radius: 0.5em;
+}
+
+/* Banner Side of Container */
+.banner-side{
+    position: absolute;
+    z-index: 2;
+    right: 65%;
+    width: 35%;
+    height: 100%;
+    flex-direction: column;
+    background-color: #02315E;
+    opacity: 1;
+    color: #EEFCF8;
+    text-align: center;
+    transition: 1s;
+}
+
+/* Form Side of Container */
+.form-side{
+    overflow-y: scroll;
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    border-radius: 0.5em;
+    width: 65%;
+    height: 100%;
+    opacity: 1;
+    font-weight: bold;
+    color: #035E7B;
+    transition: 1s;
+}
+
+.send-right{
+    right: 0;
+    border-radius: 0em 0.5em 0.5em 0em;
+}
+
+.send-left{
+    right: 35%;
+    border-radius:0.5em 0em  0em 0.5em ;
+
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+
+  ::-webkit-scrollbar-thumb {
+    background: #035E7B; 
+  }
+  
+  /* Handle on hover */
+
+/* Layout styling of forms, labels, inputs */
+.form-comp{
+    flex-direction: column;
+}
+
+.sign-up-form{
+    width: 50%;
+    flex-direction: column;
+}
+
+.sign-up-form > label{
+    padding: 0.5em;
+    width: 100%
+}
+
+.sign-up-form > label > input{
+    width: 100%
+}
+
+.enterprise-list-container{
+    height: inherit;
+}
+
+
+/* All Buttons Styling */
+button {
+    padding: 1em;
+
+    border: 1px solid #EEFCF8;
+    border-radius: 5em;
+    
+    background-color: #2F70AF;
+
+    color: #EEFCF8;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+button:focus {
+    outline: 0;
+}
+
+button:hover{
+    opacity: 0.9;
+}
+
+/* All Inputs Styling */
+input {
+    padding: 0.5em;
+    border: 1px solid #2F70AF;
+}

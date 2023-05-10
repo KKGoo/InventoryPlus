@@ -11,10 +11,23 @@ const LogIn = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    async function logged() {
+      const response = await authService.logged();
+      if(response){
+        navigate('/home');
+      }
+    }
+    logged();
+  }, []);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     const response= await authService.login(email, password);
-    navigate('/home');
+    if(response == 200){
+      navigate('/home');
+      console.log(response)
+    }
   };
 
   return (

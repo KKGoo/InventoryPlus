@@ -4,7 +4,7 @@ import EditEnterpriseModal from "./EnterpriseEditModal";
 const companyServices = companyService();
 
 function EnterpriseList({ user }) {
-  const isAdmin = user?.isAdmin;
+  const isAdmin = user?.role;
   const [companies, setCompanies] = useState([]);
   const [editingCompany, setEditingCompany] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -20,13 +20,12 @@ function EnterpriseList({ user }) {
     }
   };
 
-
   useEffect(() => {
     companyServices.getCompanies().then((response) => {
       console.log(response);
       setCompanies(response);
     });
-    updateList()
+    updateList();
   }, []);
 
   const handleClose = () => {
@@ -36,7 +35,7 @@ function EnterpriseList({ user }) {
   const handleEditEnterprise = (company) => {
     setEditingCompany(company);
     setShowModal(true);
-        console.log(`Edit enterprise with ID ${company.nit}`);
+    console.log(`Edit enterprise with ID ${company.nit}`);
   };
 
   const handleDeleteEnterprise = (company) => {
@@ -46,25 +45,37 @@ function EnterpriseList({ user }) {
 
   return (
     <div className="enterprise-list-container">
-      <h1>Enterprises</h1>
-      <ul>
-        {companies.map((company) => (
-          <li key={company?.nit}>
-            <h2>{company?.name}</h2>
-            <p>Address: {company?.address}</p>
-            <p>NIT: {company?.nit}</p>
-            <p>Phone: {company?.phone}</p>
-            <div>
-              <button onClick={() => handleEditEnterprise(company)}>
-                Edit
-              </button>
-              <button onClick={() => handleDeleteEnterprise(company?.nit)}>
-                Delete
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>NIT</th>
+            <th>Phone</th>
+            {isAdmin && <th>Actions</th>}
+          </tr>
+        </thead>
+        <tbody>
+          {companies.map((company) => (
+            <tr key={company?.nit}>
+              <td>{company?.name}</td>
+              <td>{company?.address}</td>
+              <td>{company?.nit}</td>
+              <td>{company?.phone}</td>
+              {isAdmin && (
+                <td>
+                  <button onClick={() => handleEditEnterprise(company)}>
+                    Edit
+                  </button>
+                  <button onClick={() => handleDeleteEnterprise(company?.nit)}>
+                    Delete
+                  </button>
+                </td>
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
       {editingCompany && (
         <EditEnterpriseModal
           company={editingCompany}

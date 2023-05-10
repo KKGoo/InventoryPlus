@@ -4,6 +4,8 @@ services:
   server:
     image: inventory-server:1.0
     restart: unless-stopped
+    environment:
+      - COOKIE_DOMAIN=.kaizoyu.ovh
     expose:
       - 3000
     volumes:

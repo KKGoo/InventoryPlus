@@ -7,14 +7,10 @@ function UserPage() {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await authService.getUser();
-      if (response) {
-        setEmail(response.email);
-      }
-    }
-    fetchData();
-  }, []);
+    authService.user().then((response) => {
+        setEmail(response.email)
+      });
+    }, []);
 
   return (
     <div>

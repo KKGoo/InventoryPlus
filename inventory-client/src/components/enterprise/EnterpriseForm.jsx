@@ -47,7 +47,7 @@ const EnterpriseForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="form-enterprise" onSubmit={handleSubmit}>
       <Input
         label="Enterprise Name"
         name="name"

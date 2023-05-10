@@ -15,6 +15,7 @@ const AuthService = () => {
         }
       );
       if (response.status) {
+        return response.status
       }
     } catch (error) {
       console.error(error);

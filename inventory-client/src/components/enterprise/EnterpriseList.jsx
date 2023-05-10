@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import companyService from "../../service/CompanyService";
 import EditEnterpriseModal from "./EnterpriseEditModal";
+import { FiEdit, FiDelete } from 'react-icons/fi';
+
 const companyServices = companyService();
 
 function EnterpriseList({ user }) {
@@ -52,7 +54,7 @@ function EnterpriseList({ user }) {
             <th>Address</th>
             <th>NIT</th>
             <th>Phone</th>
-            {isAdmin && <th>Actions</th>}
+            {isAdmin === 0 && <th>Actions</th>}
           </tr>
         </thead>
         <tbody>
@@ -62,14 +64,18 @@ function EnterpriseList({ user }) {
               <td>{company?.address}</td>
               <td>{company?.nit}</td>
               <td>{company?.phone}</td>
-              {isAdmin && (
+              {isAdmin === 0  && (
                 <td>
-                  <button onClick={() => handleEditEnterprise(company)}>
-                    Edit
+                  <div className="actions">
+                  <button className="actions-buttons" onClick={() => handleEditEnterprise(company)}>
+                    <FiEdit/>
                   </button>
-                  <button onClick={() => handleDeleteEnterprise(company?.nit)}>
-                    Delete
+                  <button className="actions-buttons" onClick={() => handleDeleteEnterprise(company?.nit)}>
+                  <FiDelete/>
+
                   </button>
+                  </div>
+
                 </td>
               )}
             </tr>

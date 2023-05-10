@@ -10,23 +10,38 @@ const LogIn = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const emailRegex = /^\S+@\S+\.\S+$/;
 
   useEffect(() => {
     async function logged() {
       const response = await authService.logged();
-      if(response){
+      if(response === 200){
         navigate('/home');
+      }
+      else {
+        console.log(false)
       }
     }
     logged();
   }, []);
-
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    if (!emailRegex.test(value)) {
+      setError("Invalid email address");
+    } else {
+      setError(null);
+      setemail(value);
+    }
+  };
   const handleLogin = async (e) => {
     e.preventDefault();
-    const response= await authService.login(email, password);
+    const response = await authService.login(email, password);
+    console.log(response)
     if(response == 200){
       navigate('/home');
-      console.log(response)
+    }
+    else{
+      console.log('intenta de nuevo')
     }
   };
 

@@ -19,9 +19,6 @@ function Header(props) {
     <div className="header">
       <h1>{props.title}</h1>
       <div className="links">
-        <Link to="/user" className="user-icon">
-          <FiUser />
-        </Link>
         <div className="logout">
           <FiLogOut onClick={handleLogOut} />
         </div>

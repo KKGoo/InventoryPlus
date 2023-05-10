@@ -1,54 +1,84 @@
 import React, { useState } from "react";
+import companyService from "../../service/CompanyService";
+
+const companyServices = companyService()
+
+
+const Input = ({ label, name, value, type, onChange }) => {
+  return (
+    <label>
+      {label}:
+      <input type={type} name={name} value={value} onChange={onChange} />
+    </label>
+  );
+};
 
 const EnterpriseForm = () => {
-  const [nombre, setNombre] = useState("");
-  const [direccion, setDireccion] = useState("");
-  const [nit, setNit] = useState("");
-  const [telefono, setTelefono] = useState("");
-
-  const handleNombreChange = (event) => {
-    setNombre(event.target.value);
+  const initialState = {
+    nit: "",
+    name: "",
+    address: "",
+    phone: "",
   };
-
-  const handleDireccionChange = (event) => {
-    setDireccion(event.target.value);
-  };
-
-  const handleNitChange = (event) => {
-    setNit(event.target.value);
-  };
-
-  const handleTelefonoChange = (event) => {
-    setTelefono(event.target.value);
-  };
+  const [formValues, setFormValues] = useState(initialState);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aquí puedes enviar la información de la empresa al servidor
-    console.log(nombre, direccion, nit, telefono);
+    console.log(formValues);
+
+    companyServices.createCompany(
+      formValues.nit,
+      formValues.name,
+      formValues.address,
+      formValues.phone
+    )
+      .then((company) => {
+        console.log("Empresa creada:", company);
+        // Aquí puedes hacer algo con el objeto de empresa que se ha creado, como mostrar una alerta o redirigir al usuario a otra página.
+      })
+      .catch((error) => {
+        console.error("Error al crear empresa:", error);
+        // Aquí puedes hacer algo con el mensaje de error que se ha devuelto, como mostrar una alerta o un mensaje de error en el formulario.
+      });
+  };
+
+  const handleChange = (name, value) => {
+    setFormValues({ ...formValues, [name]: value });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        Nombre de la empresa:
-        <input type="text" value={nombre} onChange={handleNombreChange} />
-      </label>
+      <Input
+        label="Enterprise Name"
+        name="name"
+        type="text"
+        value={formValues.name}
+        onChange={(event) => handleChange("name", event.target.value)}
+      />
       <br />
-      <label>
-        Dirección:
-        <input type="text" value={direccion} onChange={handleDireccionChange} />
-      </label>
+      <Input
+        label="Address"
+        name="address"
+        type="text"
+        value={formValues.address}
+        onChange={(event) => handleChange("address", event.target.value)}
+      />
       <br />
-      <label>
-        NIT:
-        <input type="text" value={nit} onChange={handleNitChange} />
-      </label>
+      <Input
+        label="NIT"
+        name="nit"
+        type="text"
+        value={formValues.nit}
+        onChange={(event) => handleChange("nit", event.target.value)}
+      />
       <br />
-      <label>
-        Teléfono:
-        <input type="text" value={telefono} onChange={handleTelefonoChange} />
-      </label>
+      <Input
+        label="Phone"
+        name="phone"
+        type="text"
+        value={formValues.phone}
+        onChange={(event) => handleChange("phone", event.target.value)}
+      />
       <br />
       <button type="submit">Registrar</button>
     </form>

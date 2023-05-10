@@ -1,42 +1,6 @@
-/* import { useState } from "react";
-import EnterpriseForm from "../components/enterprise/EnterpriseForm";
-import EnterpriseList from "../components/enterprise/EnterpriseList";
-import "../styles/home.css"; // Importamos el archivo CSS para Home
 
-function Home() {
-  const [showForm, setShowForm] = useState(false);
-
-  const handleFormToggle = () => {
-    setShowForm(!showForm);
-  };
-
-  return (
-    <>
-      <Header title="InventoryPlus" />
-      <div className="home-container">
-        <div className={`enterprise-list ${showForm ? "hide" : ""}`}>
-          <EnterpriseList enterprises={enterprises.enterprises} />
-        </div>
-        <div
-          className={`enterprise-form ${
-            showForm ? "form-show" : "form-show-instant"
-          }`}
-        >
-          <EnterpriseForm />
-        </div>
-        <button className="form-toggle" onClick={handleFormToggle}>
-          {showForm ? "Back" : "Add Enterprise"}
-        </button>
-      </div>
-    </>
-  );
-}
-
-export default Home;
- */
 
 import React, { useState } from "react";
-import enterprises from "../utils/.json";
 import Header from "../components/common/Header";
 
 // styling
@@ -63,6 +27,7 @@ const Container = () => {
 
   return (
     <>
+    <Header title="InventoryPlus" />
       <div className="App cfb">
         <div className="Container cfb">
           <div className={setBannerClass()}>
@@ -75,7 +40,7 @@ const Container = () => {
 
           <div className={setFormClass()}>
             {welcome ? (
-              <EnterpriseList enterprises={enterprises.enterprises} />
+              <EnterpriseList />
             ) : (
               <EnterpriseForm />
             )}

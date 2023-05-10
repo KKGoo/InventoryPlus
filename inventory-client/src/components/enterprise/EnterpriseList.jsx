@@ -1,34 +1,46 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
+import companyService from "../../service/CompanyService";
 
-function EnterpriseList({ enterprises, user }) {
+
+const companyServices = companyService()
+
+function EnterpriseList({user}) {
 
   const isAdmin = user?.isAdmin;
+  const [companies, setCompanies] = useState([]);
 
-  const handleEditEnterprise = (enterprise) => {
-    // Abrir formulario de edición de empresa
-    console.log(`Edit enterprise with ID ${enterprise.id}`);
+
+  useEffect(() => {
+    companyServices.getCompanies().then((response) => {
+      console.log(response)
+      setCompanies(response);
+    });
+  }, []);
+  
+  const handleEditEnterprise = (company) => {
+    console.log(`Edit enterprise with ID ${company.nit}`);
   };
 
-  const handleDeleteEnterprise = (enterprise) => {
-    // Llamar a función de eliminación de empresa
-    console.log(`Delete enterprise with ID ${enterprise.id}`);
+  const handleDeleteEnterprise = (company) => {
+    companyServices.deleteCompany(company)
+    console.log(`Delete enterprise with ID ${company.nit}`);
   };
 
   return (
     <div className="enterprise-list-container">
       <h1>Enterprises</h1>
       <ul>
-        {enterprises.map((enterprise) => (
-          <li key={enterprise?.id}>
-            <h2>{enterprise?.name}</h2>
-            <p>Address: {enterprise?.address}</p>
-            <p>NIT: {enterprise?.nit}</p>
-            <p>Phone: {enterprise?.phone}</p>
+        {companies.map((company) => (
+          <li key={company?.nit}>
+            <h2>{company?.name}</h2>
+            <p>Address: {company?.address}</p>
+            <p>NIT: {company?.nit}</p>
+            <p>Phone: {company?.phone}</p>
               <div>
-                <button onClick={() => handleEditEnterprise(enterprise)}>
+                <button onClick={() => handleEditEnterprise(company)}>
                   Edit
                 </button>
-                <button onClick={() => handleDeleteEnterprise(enterprise)}>
+                <button onClick={() => handleDeleteEnterprise(company?.nit)}>
                   Delete
                 </button>
               </div>

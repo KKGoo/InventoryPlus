@@ -19,3 +19,8 @@ make stop
 - Node LTS
 - Podman >3
 - podman-compose >1.0.0
+
+## Docs
+
+[Server](inventory-server/README.md)
+[Client](inventory-client/README.md)

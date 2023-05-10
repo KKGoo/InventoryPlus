@@ -59,29 +59,6 @@ Para eliminar una empresa, sigue los siguientes pasos:
 1. Haz clic en el botón "Eliminar" correspondiente a la empresa que deseas eliminar.
 2. Confirma la eliminación en el cuadro de diálogo.
 
-### Agregar un producto
-
-Para agregar un producto a una empresa, sigue los siguientes pasos:
-
-1. Haz clic en el botón "Agregar producto" correspondiente a la empresa deseada.
-2. Completa el formulario con los datos del producto.
-3. Haz clic en el botón "Guardar".
-
-### Editar un producto
-
-Para editar un producto, sigue los siguientes pasos:
-
-1. Haz clic en el botón "Editar" correspondiente al producto que deseas modificar.
-2. Actualiza los datos en el formulario.
-3. Haz clic en el botón "Guardar".
-
-### Eliminar un producto
-
-Para eliminar un producto, sigue los siguientes pasos:
-
-1. Haz clic en el botón "Eliminar" correspondiente al producto que deseas eliminar.
-2. Confirma la eliminación en el cuadro de diálogo.
-
 ## Tecnologías utilizadas
 
 La aplicación ha sido construida utilizando las siguientes tecnologías:

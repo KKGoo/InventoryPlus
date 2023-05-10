@@ -4,6 +4,8 @@ WORKDIR /usr/src/app
 
 COPY . .
 RUN apk add tar
+ENV PORT=3001
+ENV REACT_APP_BACKEND_URL=https://back.kaizoyu.ovh
 RUN npm install && npm run build
 RUN cd build/ && tar -czvf build.tar.gz *
 

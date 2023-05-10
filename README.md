@@ -1,6 +1,8 @@
 # InventoryPlus
 
-InventoryPlus es una aplicación web para la gestión de inventarios. Con ella, los usuarios pueden agregar, editar y eliminar empresas y productos, así como llevar un registro de sus existencias.
+InventoryPlus es una aplicación web para la gestión de inventarios. Con ella, los usuarios pueden agregar, editar y eliminar empresas , así como llevar un registro de sus existencias.
+
+'Realmente tuve muy poco tiempo para terminar la prueba de la manera en la que quisiera, solo conte con un dia, me falto las valiadaciones de los formularios el frontend tiene un par de bugs, y no tenia alguna herramienta para enviar los formularios, apesar de esto creo que logre completar el backend y el frontend'
 
 ## Instalación
 
@@ -10,29 +12,25 @@ Para instalar la aplicación, sigue los siguientes pasos:
 
 git clone https://github.com/tu-usuario/inventoryplus.git
 
-css
-Copy code
+
 
 2. Accede a la carpeta del proyecto con:
 
 cd inventoryplus
 
-markdown
-Copy code
+
 
 3. Instala las dependencias con:
 
 npm install
 
-markdown
-Copy code
+
 
 4. Inicia la aplicación con:
 
 npm start
 
-markdown
-Copy code
+
 
 ## Uso
 
@@ -91,8 +89,7 @@ La aplicación ha sido construida utilizando las siguientes tecnologías:
 - React.js
 - CSS
 - Node.js
-- Express.js
-- MongoDB
+- Sqlite
 
 ## Contribución
 
@@ -119,9 +116,8 @@ Copy code
 
 ## Autores
 
-- Nombre Apellido (@nombre_de_usuario)
-- Nombre Apellido (@nombre_de_usuario)
-- Nombre Apellido (@nombre_de_usuario)
+-Santiago Leon Garzon 
+
 
 ## Licencia
 

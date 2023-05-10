@@ -24,7 +24,6 @@ const EnterpriseForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(formValues);
 
     companyServices.createCompany(
       formValues.nit,
@@ -34,6 +33,7 @@ const EnterpriseForm = () => {
     )
       .then((company) => {
         console.log("Empresa creada:", company);
+        formValues(initialState)
         // Aquí puedes hacer algo con el objeto de empresa que se ha creado, como mostrar una alerta o redirigir al usuario a otra página.
       })
       .catch((error) => {

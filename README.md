@@ -2,7 +2,8 @@
 
 InventoryPlus es una aplicación web para la gestión de inventarios. Con ella, los usuarios pueden agregar, editar y eliminar empresas , así como llevar un registro de sus existencias.
 
-'Realmente tuve muy poco tiempo para terminar la prueba de la manera en la que quisiera, solo conte con un dia, me falto las valiadaciones de los formularios el frontend tiene un par de bugs, y no tenia alguna herramienta para enviar los formularios, apesar de esto creo que logre completar el backend y el frontend'
+'Realmente tuve muy poco tiempo para terminar la prueba de la manera en la que quisiera, solo conte con un dia, me falto las valiadaciones de los formularios el frontend tiene un par de bugs, y no tenia alguna herramienta para enviar los formularios, apesar de esto creo que logre completar el backend y el frontend, hay que correr el servidor en una consola aparte en el caso de que lo quieran correr local
+'
 
 ## Instalación
 

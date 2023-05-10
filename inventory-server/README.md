@@ -58,6 +58,9 @@ If user is already logged in, status code `201` is returned. If login is success
 code `200` is returned if creation was successful. After registration, user has to log in.
 - `GET /logout` = Logs the current user out by deleting the session, and the user cookies. Returns `200` if logout was
 successful.
+- `GET /user` = Requires authentication. Returns the user data, (email and role) as a JSON string. Returns `200` if
+found, else `400` and triggers logout at failure.
+- `GET /islogged` = Returns 200 if user is logged in, 401 if not.
 
 ### Company
 
@@ -73,3 +76,8 @@ present in the request body. Returns `200` on creation.
 present in the request body. Returns `200` on update.
 - `DELETE /company/:nit` = Authentication and admin role required. Deletes a company instance by NIT. Returns `200`
 if deletion was successful.
+
+
+## ENV Vars
+
+- `COOKIE_DOMAIN` = Domain for the session cookie. Defaults to empty.

@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+
+  server:
+    image: inventory-server:1.0
+    restart: unless-stopped
+    environment:
+      - COOKIE_DOMAIN=.kaizoyu.ovh
+    expose:
+      - 3000
+    volumes:
+      - ./data/server:/home/app/web/db
+
+  client:
+    image: inventory-client:1.0
+    restart: unless-stopped
+    expose:
+      - 80
+
+  nginx-proxy-manager:
+    image: docker.io/jc21/nginx-proxy-manager:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "81:81"
+      - "443:443"
+    environment:
+      - DISABLE_IPV6=true
+    volumes:
+      - ./data/nginx/data:/data
+      - ./data/nginx/letsencrypt:/etc/letsencrypt

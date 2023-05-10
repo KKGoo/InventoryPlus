@@ -1,6 +1,7 @@
 import KoaRouter from "koa-router";
 import {User} from "../storage/database.mjs";
 import {hashPassword, validatePassword} from "../utils/crypto.mjs";
+import {requireAuthentication} from "../middleware/authentication.mjs";
 
 export const router = new KoaRouter();
 
@@ -67,7 +68,26 @@ router.get("/islogged", async ctx => {
 
     ctx.response.status = 401;
     ctx.body = "Not logged in";
-})
+});
+
+router.get("/user", requireAuthentication, async ctx => {
+    const user = await User.findAll({
+        attributes: ['email', 'role'],
+        where: {
+            id: Number(ctx.session.userId)
+        }
+    });
+
+    if (user.length === 0) {
+        ctx.response.status = 400;
+        ctx.response.body = "User not found."
+        ctx.session = null;
+        return;
+    }
+
+    ctx.response.status = 200;
+    ctx.response.body = JSON.stringify(user[0]);
+});
 
 router.post("/register", bodyCredentialsMiddleware, async ctx => {
     const credentials = ctx.bodyCredentials;

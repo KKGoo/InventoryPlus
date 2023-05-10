@@ -11,17 +11,29 @@ const app = new Koa();
 const router = new KoaRouter();
 
 
+if (!("COOKIE_DOMAIN" in process.env)) {
+    process.env["COOKIE_DOMAIN"] = "";
+}
+
 app.keys = ['@XcCJcWJW^$RgqldM4R50VFcuIBS&3c1Ctv^BwaB925WWVboDO'];
 
 app.use(session({
     store: new SQLite3Store("./db/sessions.db", {
         ttl: 86400000,
         interval: 120000
-    })
+    }),
+    cookie: {
+        path: "/",
+        httpOnly: true,
+        maxAge: 86400000,
+        overwrite: true,
+        signed: true,
+        domain: process.env["COOKIE_DOMAIN"]
+    }
 }));
 
 app.use(cors({
-    allowHeaders: ["*"],
+    allowHeaders: ["Accept", "Accept-Encoding", "Accept-Language", "content-type", "Connection", "Host", "Origin", "Referer", "User-Agent"],
     credentials: true
 }));
 app.use(bodyParser());

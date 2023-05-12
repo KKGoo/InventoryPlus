@@ -42,6 +42,7 @@ function EnterpriseList({ user }) {
 
   const handleDeleteEnterprise = (company) => {
     companyServices.deleteCompany(company);
+    updateList()
     console.log(`Delete enterprise with ID ${company.nit}`);
   };
 

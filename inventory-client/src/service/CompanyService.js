@@ -10,11 +10,8 @@ const companyService = () => {
           body: JSON.stringify({ nit, name, address, phone }),
         }
       );
+      return response.text()
 
-      if (!response.status) {
-        const errorData = await response.status();
-        throw new Error(errorData.reason);
-      }
     } catch (error) {
       console.error("Error al crear empresa:", error);
       throw error;

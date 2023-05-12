@@ -6,43 +6,43 @@ import "../../styles/login.css";
 const authService = AuthService();
 
 const LogIn = () => {
-  const [email, setemail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const emailRegex = /^\S+@\S+\.\S+$/;
 
-  useEffect(() => {
-    async function logged() {
-      const response = await authService.logged();
-      if(response === 200){
-        navigate('/home');
-      }
-      else {
-        console.log(false)
-      }
-    }
-    logged();
-  }, []);
-  const handleEmailChange = (e) => {
-    const value = e.target.value;
-    if (!emailRegex.test(value)) {
-      setError("Invalid email address");
-    } else {
-      setError(null);
-      setemail(value);
-    }
-  };
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    const response = await authService.login(email, password);
+  async function logged() {
+    const response = await authService.logged();
     console.log(response)
-    if(response == 200){
+    if(response === true){
       navigate('/home');
     }
-    else{
-      console.log('intenta de nuevo')
+    else {
+      console.log(false)
     }
+  }
+
+  useEffect(() => {
+    logged();
+  }, []);
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (!emailRegex.test(email)) {
+      setError("Invalid email address");
+      return;
+    }
+    const response = await authService.login(email, password);
+    setError(response);
+
+    console.log(response)
+    logged();
+
   };
 
   return (
@@ -58,7 +58,7 @@ const LogIn = () => {
                 className="Form__input"
                 type="text"
                 value={email}
-                onChange={(e) => setemail(e.target.value)}
+                onChange={handleEmailChange}
               />
             </div>
             <div className="Form__input-container">

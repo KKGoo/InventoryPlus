@@ -1,4 +1,3 @@
-import React from "react";
 
 const AuthService = () => {
   const login = async (email, password) => {
@@ -14,8 +13,10 @@ const AuthService = () => {
           body: JSON.stringify({ email, password }),
         }
       );
+      const body = await response.text()
+      console.log(body)
       if (response.status) {
-        return response.status
+        return body
       }
     } catch (error) {
       console.error(error);

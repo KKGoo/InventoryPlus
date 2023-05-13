@@ -4,6 +4,7 @@ import LogIn from "./components/login";
 import "./styles/global.css";
 import Home from "./pages/home";
 import PrivateRoute from "./components/common/protectedRoute";
+import EnterpriseInventory from './pages/inventory';
 
 function App() {
 
@@ -13,6 +14,9 @@ function App() {
         <Routes>
           <Route exact path='/home' element={<PrivateRoute/>}>
             <Route exact path='/home' element={<Home/>}/>
+          </Route>
+          <Route exact path='/inventory' element={<PrivateRoute/>}>
+            <Route exact path='/inventory:nit' element={<EnterpriseInventory/>}/>
           </Route>
           <Route exact path='/' element={<LogIn/>}/>
         </Routes>

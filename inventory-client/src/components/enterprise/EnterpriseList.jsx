@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import companyService from "../../service/CompanyService";
 import EditEnterpriseModal from "./EnterpriseEditModal";
-import { FiEdit, FiDelete } from 'react-icons/fi';
+import { FiEdit, FiDelete, FiEye } from 'react-icons/fi';
 
 const companyServices = companyService();
 
@@ -11,39 +13,38 @@ function EnterpriseList({ user }) {
   const [editingCompany, setEditingCompany] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
-  const updateList = async () => {
-    try {
-      companyServices.getCompanies().then((response) => {
-        console.log(response);
-        setCompanies(response);
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const navigate = useNavigate();
 
   useEffect(() => {
-    companyServices.getCompanies().then((response) => {
-      console.log(response);
-      setCompanies(response);
-    });
-    updateList();
+    const fetchCompanies = async () => {
+      try {
+        const response = await companyServices.getCompanies();
+        setCompanies(response);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchCompanies();
   }, []);
 
-  const handleClose = () => {
-    setEditingCompany(null);
-    setShowModal(false);
-  };
   const handleEditEnterprise = (company) => {
     setEditingCompany(company);
     setShowModal(true);
     console.log(`Edit enterprise with ID ${company.nit}`);
   };
+  
+  const handleInventory = (company) => {
+    navigate(`/inventory/${company}`);
+  }
 
-  const handleDeleteEnterprise = (company) => {
-    companyServices.deleteCompany(company);
-    updateList()
-    console.log(`Delete enterprise with ID ${company.nit}`);
+  const handleDeleteEnterprise = async (companyNit) => {
+    try {
+      await companyServices.deleteCompany(companyNit);
+      setCompanies(prevCompanies => prevCompanies.filter(c => c.nit !== companyNit));
+      console.log(`Delete enterprise with ID ${companyNit}`);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -61,22 +62,25 @@ function EnterpriseList({ user }) {
         <tbody>
           {companies.map((company) => (
             <tr key={company?.nit}>
-              <td>{company?.name}</td>
+              <td>
+                <Link to={`/inventory/${company.nit}`}>{company?.name}</Link>
+              </td>
               <td>{company?.address}</td>
               <td>{company?.nit}</td>
               <td>{company?.phone}</td>
-              {isAdmin === 0  && (
+              {isAdmin === 0 && (
                 <td>
                   <div className="actions">
-                  <button className="actions-buttons" onClick={() => handleEditEnterprise(company)}>
-                    <FiEdit/>
-                  </button>
-                  <button className="actions-buttons" onClick={() => handleDeleteEnterprise(company?.nit)}>
-                  <FiDelete/>
-
-                  </button>
+                    <button className="actions-buttons" onClick={() => handleEditEnterprise(company)}>
+                      <FiEdit/>
+                    </button>
+                    <button className="actions-buttons" onClick={() => handleDeleteEnterprise(company?.nit)}>
+                      <FiDelete/>
+                    </button>
+                    <button className="actions-buttons" onClick={() => handleInventory(company?.nit)}>
+                    <FiEye/>
+                    </button>
                   </div>
-
                 </td>
               )}
             </tr>
@@ -86,9 +90,9 @@ function EnterpriseList({ user }) {
       {editingCompany && (
         <EditEnterpriseModal
           company={editingCompany}
-          updateList={updateList}
+          updateList={() => setEditingCompany(null)}
           show={showModal}
-          onHide={handleClose}
+          onHide={() => setShowModal(false)}
         />
       )}
     </div>

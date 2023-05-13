@@ -54,6 +54,12 @@
     right: 0;
     border-radius: 0em 0.5em 0.5em 0em;
 }
+.container-inventory{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .send-left{
     right: 35%;

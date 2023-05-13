@@ -1,0 +1,19 @@
+{
+  "development": {
+    "models": "./src/storage/models/*.js",
+    "dialect": "sqlite",
+    "storage": "./db/data.db"
+  },
+  "test": {
+    "models": "./src/storage/models/*.js",
+    "dialect": "sqlite",
+    "storage": "./db/data.db"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "sqlite"
+  }
+}

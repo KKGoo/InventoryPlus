@@ -4,6 +4,8 @@ import session from "koa-generic-session";
 import SQLite3Store from "koa-sqlite3-session";
 import { router as authRouter } from "./api/auth.mjs";
 import { router as companyRouter } from "./api/company.mjs";
+import { router as inventoryRouter} from "./api/item.mjs";
+
 import bodyParser from "koa-bodyparser";
 import cors from "@koa/cors";
 
@@ -54,6 +56,8 @@ app.use(authRouter.routes());
 app.use(authRouter.allowedMethods());
 app.use(companyRouter.routes());
 app.use(companyRouter.allowedMethods());
+app.use(inventoryRouter.routes());
+app.use(inventoryRouter.allowedMethods());
 
 app.use(async (ctx, next) => {
   try {

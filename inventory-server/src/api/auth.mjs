@@ -1,5 +1,5 @@
 import KoaRouter from "koa-router";
-import {User} from "../storage/database.mjs";
+import {User} from "../storage/database.js";
 import {hashPassword, validatePassword} from "../utils/crypto.mjs";
 import {requireAuthentication} from "../middleware/authentication.mjs";
 

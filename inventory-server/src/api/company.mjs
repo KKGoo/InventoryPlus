@@ -1,5 +1,5 @@
 import KoaRouter from "koa-router";
-import {Company} from "../storage/database.js";
+import {Company} from "../storage/database.mjs";
 import {requireAdmin, requireAuthentication} from "../middleware/authentication.mjs";
 
 export const router = new KoaRouter();

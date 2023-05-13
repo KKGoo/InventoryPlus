@@ -1,8 +1,7 @@
 import {Sequelize} from 'sequelize';
 import {hashPassword} from "../utils/crypto.mjs";
-import {userModel} from "./models/user.js";
-import {companyModel} from "./models/company.js";
-import {itemModel} from './models/item.js';
+import {userModel} from "./models/user.mjs";
+import {companyModel} from "./models/company.mjs";
 
 
 const sequelize = new Sequelize({
@@ -17,10 +16,6 @@ await User.sync();
 
 export const Company = companyModel(sequelize);
 await Company.sync();
-
-export const Item = itemModel(sequelize);
-await Item.sync();
-
 
 // User management system needed to create admin users securely
 // Admin user will be hard-coded for demonstration purposes

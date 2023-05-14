@@ -1,6 +1,7 @@
 import KoaRouter from "koa-router";
 import {Company} from "../storage/database.mjs";
 import {requireAdmin, requireAuthentication} from "../middleware/authentication.mjs";
+import {deleteModelFromSequelize} from "../middleware/shared.js";
 
 export const router = new KoaRouter();
 
@@ -9,7 +10,8 @@ const requiredKeys = [
     "name",
     "address",
     "phone"
-]
+];
+
 
 router.get("/company/:nit", requireAuthentication, async ctx => {
     const nitId = ctx.request.params.nit;
@@ -22,24 +24,15 @@ router.get("/company/:nit", requireAuthentication, async ctx => {
     ctx.response.status = 200;
 });
 
-router.delete("/company/:nit", requireAdmin, async ctx => {
-    const nitId = ctx.request.params.nit;
-
-    const result = await Company.destroy({
-        where: {
-            nit: nitId
-        }
-    });
-
-    if (result === 0) {
-        ctx.response.body = "Not found."
-        ctx.response.status = 400;
-        return;
-    }
-
-    ctx.response.body = "Deleted."
-    ctx.response.status = 200;
-});
+router.delete(
+    "/company/:id",
+    requireAdmin,
+    async (ctx, next) => {
+        ctx.state.currentModel = Company;
+        await next();
+    },
+    deleteModelFromSequelize
+);
 
 router.put("/company/:nit", requireAdmin, async ctx => {
     const nitId = ctx.request.params.nit;

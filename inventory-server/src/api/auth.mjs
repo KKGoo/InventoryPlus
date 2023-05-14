@@ -2,28 +2,10 @@ import KoaRouter from "koa-router";
 import {User} from "../storage/database.mjs";
 import {hashPassword, validatePassword} from "../utils/crypto.mjs";
 import {requireAuthentication} from "../middleware/authentication.mjs";
+import {bodyCredentialsMiddleware} from "../middleware/authentication.mjs";
 
 export const router = new KoaRouter();
 
-
-const bodyCredentialsMiddleware = async (ctx, next) => {
-    const credentials = ctx.request.body;
-
-    if (!("email" in credentials) || !("password" in credentials)) {
-        ctx.response.status = 400;
-        ctx.body = "Email and/or password have to be declared";
-        return;
-    }
-
-    if (!(typeof credentials.email === "string") || !(typeof credentials.password === "string")) {
-        ctx.response.status = 400;
-        ctx.body = "Email and password must be strings.";
-        return;
-    }
-
-    ctx.bodyCredentials = credentials;
-    await next();
-};
 
 router.post("/login", bodyCredentialsMiddleware, async ctx => {
     const credentials = ctx.bodyCredentials;

@@ -41,6 +41,15 @@ Fields:
 - `address` = string
 - `phone` = string
 
+### Inventory
+
+Fields:
+- `companyNit` = string, fk, required
+- `name` = string
+- `description` = string, nullable
+- `price` = float
+- `quantity` = integer
+
 ## API Endpoints
 
 Runs in port 3000.
@@ -77,6 +86,21 @@ present in the request body. Returns `200` on update.
 - `DELETE /company/:nit` = Authentication and admin role required. Deletes a company instance by NIT. Returns `200`
 if deletion was successful.
 
+
+### Inventory
+
+Uses model: Item
+
+- `GET /inventory/company/:nit` = Authentication required. Gets all item instances related to a company, by the NIT. 
+  Returned item is a list of items, or an empty list if nothing was found. Returns `200` status code unconditionally.
+- `GET /inventory/:id` = Authentication required. Gets item instance from the ID of the item.
+  Returns `200` status code unconditionally.
+- `POST /inventory` = Authentication and admin role required. Creates an item instance. All fields are expected to be
+  present in the request body. Returns `200` on creation.
+- `PUT /inventory` = Authentication and admin role required. Updates an item instance. All fields are expected to be
+  present in the request body. Returns `200` on update.
+- `DELETE /inventory/:nit` = Authentication and admin role required. Deletes an item instance by id. Returns `200`
+  if deletion was successful.
 
 ## ENV Vars
 

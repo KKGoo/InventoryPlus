@@ -19,3 +19,22 @@ export const requireAdmin = async (ctx, next) => {
 
     await next();
 };
+
+export const bodyCredentialsMiddleware = async (ctx, next) => {
+    const credentials = ctx.request.body;
+
+    if (!("email" in credentials) || !("password" in credentials)) {
+        ctx.response.status = 400;
+        ctx.body = "Email and/or password have to be declared";
+        return;
+    }
+
+    if (!(typeof credentials.email === "string") || !(typeof credentials.password === "string")) {
+        ctx.response.status = 400;
+        ctx.body = "Email and password must be strings.";
+        return;
+    }
+
+    ctx.bodyCredentials = credentials;
+    await next();
+};

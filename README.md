@@ -39,6 +39,8 @@ found inside their respective README.md file.
 - Node LTS
 - Linux (preferably), or PowerShell
 
+## Usage
+
 ### Add a company
 
 To add a company, follow these steps:

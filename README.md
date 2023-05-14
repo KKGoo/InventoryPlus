@@ -1,102 +1,83 @@
 # InventoryPlus
 
-InventoryPlus es una aplicación web para la gestión de inventarios. Con ella, los usuarios pueden agregar, editar y eliminar empresas , así como llevar un registro de sus existencias.
+InventoryPlus is a web app intended for inventory management. It allows to create, modify, edit or delete companies and
+their inventories. It also keeps track of existing stock.
 
-'Realmente tuve muy poco tiempo para terminar la prueba de la manera en la que quisiera, solo conte con un dia, me falto las valiadaciones de los formularios el frontend tiene un par de bugs, y no tenia alguna herramienta para enviar los formularios, apesar de esto creo que logre completar el backend y el frontend, hay que correr el servidor en una consola aparte en el caso de que lo quieran correr local
-'
+## Index
 
-## Instalación
+### [Client Docs](inventory-client/README.md)
+### [Server Docs](inventory-server/README.md)
 
-Para instalar la aplicación, sigue los siguientes pasos:
+## Getting started
 
-1. Clona el repositorio en tu computadora con el comando:
+```shell
+# Build Docker images
+make build-images
 
-git clone https://github.com/tu-usuario/inventoryplus.git
+# Start the project
+make start
 
+# Stop the project after you're done
+make stop
+```
 
+## Tuning up
 
-2. Accede a la carpeta del proyecto con:
+Modify the `podman-compose.yml` and `Makefile` to suit your needs.
 
-cd inventoryplus
+## Development
 
+Check `inventory-client/` and `inventory-server` for the client and server implementations. Instructions to run both are
+found inside their respective README.md file.
 
+## Requirements
 
-3. Instala las dependencias con:
+- A web domain and hosting (for a production deployment)
+- Podman (or Docker)
+- podman-compose (or docker-compose)
+- make
+- Node LTS
+- Linux (preferably), or PowerShell
 
-npm install
+### Add a company
 
+To add a company, follow these steps:
 
+1. Click on "Agregar empresa".
+2. Fill the form with the company data.
+3. Click on "Guardar".
 
-4. Inicia la aplicación con:
+### Edit a company
 
-npm start
+To modify a company, follow these steps:
 
+1. Click on "Editar" over the company you wish to edit.
+2. Modify the company data as needed.
+3. Click on "Guardar".
 
+### Delete a company
 
-## Uso
+To delete a company, follow these steps:
 
-Una vez que la aplicación está corriendo, puedes acceder a ella desde tu navegador web en la dirección http://localhost:3000.
+1. Click on "Eliminar" over the company you wish to edit.
+2. Confirm the delete action on the pop-up dialog.
 
-### Agregar una empresa
+## Used technologies
 
-Para agregar una empresa, sigue los siguientes pasos:
+The app has been built with the following technologies:
 
-1. Haz clic en el botón "Agregar empresa".
-2. Completa el formulario con los datos de la empresa.
-3. Haz clic en el botón "Guardar".
-
-### Editar una empresa
-
-Para editar una empresa, sigue los siguientes pasos:
-
-1. Haz clic en el botón "Editar" correspondiente a la empresa que deseas modificar.
-2. Actualiza los datos en el formulario.
-3. Haz clic en el botón "Guardar".
-
-### Eliminar una empresa
-
-Para eliminar una empresa, sigue los siguientes pasos:
-
-1. Haz clic en el botón "Eliminar" correspondiente a la empresa que deseas eliminar.
-2. Confirma la eliminación en el cuadro de diálogo.
-
-## Tecnologías utilizadas
-
-La aplicación ha sido construida utilizando las siguientes tecnologías:
-
+- Podman
 - React.js
 - CSS
 - Node.js
-- Sqlite
+- SQLite
+- Sequelize
+- Koa.js
 
-## Contribución
+## Authors
 
-Si deseas contribuir al desarrollo de la aplicación, puedes seguir los siguientes pasos:
+- Santiago Leon Garzon 
 
-1. Haz un fork del repositorio.
-2. Clona el fork en tu computadora.
-3. Crea una nueva rama con:
+## License
 
-git checkout -b mi-nueva-funcionalidad
-
-markdown
-Copy code
-
-4. Haz tus cambios y realiza commits.
-5. Empuja los cambios a tu fork con:
-
-git push origin mi-nueva-funcionalidad
-
-less
-Copy code
-
-6. Crea un pull request en el repositorio original.
-
-## Autores
-
--Santiago Leon Garzon 
-
-
-## Licencia
-
-La aplicación está disponible bajo la Licencia MIT. Ver el archivo LICENSE.md para más detalles.
+The app has been licensed under MIT license. See LICENSE.md for details.

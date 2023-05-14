@@ -9,6 +9,12 @@ npm install
 npm run server
 ```
 
+## Docker
+
+- Runs on port `3000`.
+- Database volume is found in `/home/app/web/db` of the container.
+- ENV variables can be passed directly on runtime.
+
 ## Authentication
 
 Authentication is cookie based. Users keep a session id related to their session in database.

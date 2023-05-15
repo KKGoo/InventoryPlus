@@ -4,25 +4,26 @@ import inventoryService from "../../service/InventoryService";
 
 const inventoryServices = inventoryService();
 
-function ModalInventory(props) {
-  const [name, setName] = useState(props.company?.name);
-  const [price, setPrice] = useState(props.company?.price);
-  const [quantity, setQuantity] = useState(props.company?.quantity);
+function EditEnterpriseModal(props) {
+  const [name, setName] = useState();
+  const [quantity, setQuantity] = useState();
+  const [description, setDescription] = useState();
+  const [id, setId] = useState();
+  const [price, setPrice] = useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await inventoryServices.createInventoryItem(
-        props.company,
-        name,
-        quantity,
-        price
-      );
-      props.updateList(); // actualizar la lista de empresas
-      props.onHide(); // cerrar el modal
-    } catch (error) {
-      console.error(error);
-    }
+    const response = await inventoryServices.createInventoryItem(
+      id,
+      name,
+      description,
+      price,
+      quantity,
+      props.company
+    );
+    console.log(response);
+    props.updateList(); // actualizar la lista de empresas
+    props.onHide(); // cerrar el modal
   };
 
   return (
@@ -33,12 +34,32 @@ function ModalInventory(props) {
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group>
+            <Form.Label>id</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter enterprise id"
+              value={id}
+              onChange={(e) => setId(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group>
             <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter enterprise name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>description</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter enterprise description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
               required
             />
           </Form.Group>
@@ -71,4 +92,4 @@ function ModalInventory(props) {
   );
 }
 
-export default ModalInventory;
+export default EditEnterpriseModal;

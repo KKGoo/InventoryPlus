@@ -1,5 +1,6 @@
 import React from "react";
 import jsPDF from "jspdf";
+import { FiDownload } from "react-icons/fi";
 
 function InventoryPDF({ inventory }) {
   const generatePDF = () => {
@@ -30,9 +31,11 @@ function InventoryPDF({ inventory }) {
   };
 
   return (
-    <div>
-      <button onClick={generatePDF}>Generar PDF</button>
-    </div>
+    <>
+      <button className="actions-buttons" onClick={generatePDF}>
+        <FiDownload/>
+      </button>
+    </>
   );
 }
 

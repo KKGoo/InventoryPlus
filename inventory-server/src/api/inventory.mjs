@@ -6,6 +6,7 @@ import {deleteModelFromSequelize} from "../middleware/shared.js";
 export const router = new KoaRouter();
 
 const requiredKeys = [
+    "id",
     "name",
     "price",
     "quantity",
@@ -115,6 +116,7 @@ router.post("/inventory", requireAdmin, async ctx => {
     let createdItem;
     try {
         createdItem = await Item.create({
+            id: newItem["id"],
             name: newItem["name"],
             description: newItem["description"],
             price: newItem["price"],

@@ -1,18 +1,18 @@
 
 
 const inventoryService = () => {
-    const createInventoryItem = async (id, companyNit, name, quantity, price) => {
+    const createInventoryItem = async ( id, name, description, price, quantity, companyNit) => {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/company/${companyNit}/items`,
+          `${process.env.REACT_APP_BACKEND_URL}/inventory`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
-            body: JSON.stringify({id ,name, quantity, price}),
+            body: JSON.stringify({id, name, description, price, quantity, companyNit}),
           }
         );
-        return response.status;
+        return response.text();
       } catch (error) {
         console.error("Error al crear el item de inventario:", error);
         throw error;
@@ -22,7 +22,7 @@ const inventoryService = () => {
     const getInventoryItems = async (companyNit) => {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/company/${companyNit}/items`,
+          `${process.env.REACT_APP_BACKEND_URL}/inventory/company/${companyNit}`,
           {
             method: "GET",
             credentials: "include",
